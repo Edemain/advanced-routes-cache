@@ -1,6 +1,6 @@
 import axios from "axios";
 class EDERequest {
-  request() {
+  request(): void {
     console.log(123);
   }
 }
