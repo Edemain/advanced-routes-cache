@@ -5,7 +5,8 @@ import store from "./store";
 import { globalRegister } from "./global";
 import edeRequest from "./service";
 edeRequest.request({
-  url: "/lxl"
+  url: "/home/multidata",
+  method: "GET"
 });
 
 const app = createApp(App);
