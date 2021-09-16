@@ -17,6 +17,7 @@ class EDERequest {
       this.interceptors?.responseInterceptorCatch
     );
 
+    //所有实例都有的拦截器
     this.instance.interceptors.request.use(
       (config) => {
         console.log("all-instance:请求成功的拦截");
