@@ -40,9 +40,25 @@ class EDERequest {
     );
   }
 
-  request(config: AxiosRequestConfig): void {
-    this.instance.request(config).then((res) => {
-      console.log(res);
+  request<T>(config: EDERequestConfig<T>): Promise<T> {
+    return new Promise((resolve, reject) => {
+      //单个请求添加拦截器
+      if (config.interceptors?.requestInterceptor) {
+        config = config.interceptors.requestInterceptor(config);
+      }
+      this.instance
+        .request<any, T>(config)
+        .then((res) => {
+          //单个响应的拦截器
+          if (config.interceptors?.responseInterceptor) {
+            res = config.interceptors.responseInterceptor(res);
+          }
+          resolve(res);
+        })
+        .catch((error) => {
+          reject(error);
+          return error;
+        });
     });
   }
 }

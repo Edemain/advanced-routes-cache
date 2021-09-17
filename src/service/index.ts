@@ -5,20 +5,25 @@ const edeRequest = new EDERequest({
   timeout: TIME_OUT,
   interceptors: {
     requestInterceptor: (config) => {
-      console.log("请求成功的拦截");
+      //携带特殊token
+      const token = "";
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      console.log("单个实例-请求成功的拦截");
 
       return config;
     },
     requestInterceptorCatch: (error) => {
-      console.log("请求失败的拦截");
+      console.log("单个实例-请求失败的拦截");
       return error;
     },
-    responseInterceptor: (config) => {
-      console.log("响应成功的拦截");
-      return config;
+    responseInterceptor: (res) => {
+      console.log("单个实例-响应成功的拦截");
+      return res;
     },
     responseInterceptorCatch: (error) => {
-      console.log("响应失败的拦截");
+      console.log("单个实例-响应失败的拦截");
       return error;
     }
   }
