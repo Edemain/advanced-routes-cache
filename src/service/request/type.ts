@@ -9,4 +9,5 @@ export interface EDERequestInterceptors<T = AxiosResponse> {
 
 export interface EDERequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
   interceptors?: EDERequestInterceptors<T>;
+  isLoading?: boolean;
 }

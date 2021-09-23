@@ -4,10 +4,22 @@ import router from "./router";
 import store from "./store";
 import { globalRegister } from "./global";
 import edeRequest from "./service";
+
+const app = createApp(App);
+app.use(store);
+app.use(router);
+app.use(globalRegister);
+app.mount("#app");
+interface DataType {
+  data: any;
+  returnCode: string;
+  success: boolean;
+}
+
 edeRequest
-  .request({
+  .get<DataType>({
     url: "/home/multidata",
-    method: "GET",
+    isLoading: false,
     interceptors: {
       requestInterceptor: (config) => {
         console.log("单个请求-请求成功的拦截！");
@@ -23,9 +35,3 @@ edeRequest
   .then((res) => {
     console.log(res);
   });
-
-const app = createApp(App);
-app.use(store);
-app.use(router);
-app.use(globalRegister);
-app.mount("#app");
