@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import { globalRegister } from "./global";
+// import { globalRegister } from "./global";
 import edeRequest from "./service";
 import "normalize.css";
 import "@/assets/css/index.less";
@@ -10,7 +10,7 @@ import "@/assets/css/index.less";
 const app = createApp(App);
 app.use(store);
 app.use(router);
-app.use(globalRegister);
+// app.use(globalRegister);
 app.mount("#app");
 interface DataType {
   data: any;
