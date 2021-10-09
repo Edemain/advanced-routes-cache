@@ -1,8 +1,7 @@
 import { App } from "vue";
-import "element-plus/dist/index.css";
-import { ElButton, ElIcon, ElTabPane, ElTabs } from "element-plus";
+import { User, Iphone } from "@element-plus/icons";
 
-const components = [ElButton, ElTabs, ElTabPane, ElIcon];
+const components = [User, Iphone];
 
 export default function (app: App): void {
   for (const component of components) {
