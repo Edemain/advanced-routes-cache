@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form :rules="accountRules" :model="account">
+    <el-form :rules="accountRules" :model="account" ref="formRef">
       <el-form-item label="账号" prop="name">
         <el-input v-model="account.name"></el-input>
       </el-form-item>
@@ -12,19 +12,43 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import { accountRules } from "../config/rules";
+import localCache from "@/utils/cache";
+import { ElForm } from "element-plus";
 export default defineComponent({
   name: "AccountLogin",
   setup() {
     const account = reactive({
-      name: "",
-      password: ""
+      name: localCache.getCache("advance-name") ?? "",
+      password: localCache.getCache("advance-password") ?? ""
     });
+
+    const formRef = ref<InstanceType<typeof ElForm>>();
+
+    //执行登录
+    const loginAction = (isRememberPassword: boolean) => {
+      formRef.value?.validate((valid) => {
+        if (valid) {
+          if (isRememberPassword) {
+            //记住密码操作
+            localCache.setCache("advance-name", account.name);
+            localCache.setCache("advance-password", account.password);
+          } else {
+            localCache.deleteCache("advance-name");
+            localCache.deleteCache("advance-password");
+          }
+        }
+      });
+      //执行登录操作
+      console.log("正式开始登lu");
+    };
 
     return {
       account,
-      accountRules
+      accountRules,
+      formRef,
+      loginAction
     };
   }
 });
