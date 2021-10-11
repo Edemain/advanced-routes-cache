@@ -29,7 +29,7 @@ class EDERequest {
     //所有实例都有的拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        console.log("all-instance:请求成功的拦截");
+        // console.log("all-instance:请求成功的拦截");
         if (this.isLoading) {
           this.loading = ElLoading.service({
             lock: true,
@@ -40,13 +40,13 @@ class EDERequest {
         return config;
       },
       (err) => {
-        console.log("all-instance:请求失败的拦截");
+        // console.log("all-instance:请求失败的拦截");
         return err;
       }
     );
     this.instance.interceptors.response.use(
       (res) => {
-        console.log("all-instance:响应成功的拦截");
+        // console.log("all-instance:响应成功的拦截");
         // 将loading移除
         this.loading?.close();
         const data = res.data;
@@ -57,7 +57,7 @@ class EDERequest {
         }
       },
       (err) => {
-        console.log("all-instance:响应失败的拦截");
+        // console.log("all-instance:响应失败的拦截");
         // 将loading移除
         this.loading?.close();
         // 例子: 判断不同的HttpErrorCode显示不同的错误信息

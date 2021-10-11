@@ -10,7 +10,7 @@ const edeRequest = new EDERequest({
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
-      console.log("单个实例-请求成功的拦截");
+      // console.log("单个实例-请求成功的拦截");
 
       return config;
     },
@@ -19,7 +19,7 @@ const edeRequest = new EDERequest({
       return error;
     },
     responseInterceptor: (res) => {
-      console.log("单个实例-响应成功的拦截");
+      // console.log("单个实例-响应成功的拦截");
       return res;
     },
     responseInterceptorCatch: (error) => {
