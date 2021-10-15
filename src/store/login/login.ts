@@ -1,5 +1,4 @@
-import { 
-  Module } from "vuex";
+import { Module } from "vuex";
 import { ILoginState } from "./type";
 import { IRootState } from "../type";
 const loginModule: Module<ILoginState, IRootState> = {
