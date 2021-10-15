@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue";
+import { useStore } from "vuex";
 import { accountRules } from "../config/rules";
 import localCache from "@/utils/cache";
 import { ElForm } from "element-plus";
@@ -23,6 +24,8 @@ export default defineComponent({
       name: localCache.getCache("advance-name") ?? "",
       password: localCache.getCache("advance-password") ?? ""
     });
+
+    const store = useStore();
 
     const formRef = ref<InstanceType<typeof ElForm>>();
 
@@ -38,10 +41,10 @@ export default defineComponent({
             localCache.deleteCache("advance-name");
             localCache.deleteCache("advance-password");
           }
+          //执行登录操作
+          store.dispatch("login/accountLoginAction", { ...account });
         }
       });
-      //执行登录操作
-      console.log("正式开始登lu");
     };
 
     return {
