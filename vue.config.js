@@ -12,5 +12,17 @@ module.exports = {
         resolvers: [ElementPlusResolver()]
       })
     ]
+  },
+  devServer: {
+    proxy: {
+      "^/apis": {
+        target: "http://152.136.185.210:5000",
+        changeOrigin: true,
+        secure: false,
+        pathRewrite: {
+          "^/apis": ""
+        }
+      }
+    }
   }
 };
